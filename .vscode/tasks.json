@@ -1,0 +1,16 @@
+{
+    // Basic jar creator
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Jar",
+            "type": "shell",
+            "command": "sh build.sh",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
