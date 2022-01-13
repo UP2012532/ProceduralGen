@@ -5,7 +5,7 @@
 
 #Create .class files
 cd src
-javac -verbose Main.java -d ../bin
+javac -verbose MainWindow.java -d ../bin
 
 printf "\nClasses built now creating jar.\n\n"
 
