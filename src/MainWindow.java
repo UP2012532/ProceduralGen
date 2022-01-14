@@ -13,21 +13,31 @@ class MainWindow extends JFrame {
     //Create the main window from which the application will be run.
     public MainWindow() {
         //Set window title and set close opperation
-        this.setTitle("Hello World");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Hello World");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Set initial sixe and add drawing area
-        this.setSize(new Dimension(1024, 576));
+        setSize(new Dimension(1024, 576));
         canvas = new DrawArea();
-        this.add(canvas);
+        add(canvas);
 
         //Maximize and show window
-        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
 
     //Start the mainloop for the application.
     public void run() {
         this.setVisible(true);
         System.out.println("Running");
+
+        while (isActive()) {
+            canvas.repaint();
+
+            try {
+                Thread.sleep(1500);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }                
+        }
     }
 }
