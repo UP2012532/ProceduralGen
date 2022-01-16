@@ -5,7 +5,7 @@
         {
             "label": "Build Jar",
             "type": "shell",
-            "command": "sh build.sh",
+            "command": "sh tools/build.sh",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
