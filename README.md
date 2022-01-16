@@ -6,8 +6,10 @@ The goal of this project is to visualise seeded random functions in a graphical 
 
 ## Features
 
+### General Features
+
 * [X] Create Window
 * [X] Draw grid
 * [X] Draw Cells
-* [ ] Create Random Logic
-* [ ] Enable navigation of the area
+* [X] Create Random Logic
+* [X] Enable navigation of the area

@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 class MainWindow extends JFrame {
 
     private DrawArea canvas;
-    private EventListener listener;
+    private CloseListener listener;
 
     public static void main(String[] args) {
         MainWindow mw = new MainWindow();
@@ -15,7 +15,11 @@ class MainWindow extends JFrame {
     public MainWindow() {
         //Set window title and set close opperation.
         setTitle("");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Create event listener.
+        listener = new CloseListener();
+        addWindowListener(listener);
 
         //Set initial sixe and add drawing area.
         setSize(new Dimension(1024, 576));
@@ -24,30 +28,22 @@ class MainWindow extends JFrame {
 
         //Maximize and show window
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-
-        //Create event listeners.
-        listener = new EventListener();
-        addWindowListener(listener);
     }
 
     //Start the mainloop for the application.
     public void run() {
         setVisible(true);
-        System.out.println("Running");
 
-        while (listener.isOpen()) {
-            setTitle("x:" + canvas.xPos + ", y:" + canvas.yPos);
+        while (listener.isWinOpen()) {
             canvas.repaint();
 
             try {
-                Thread.sleep(100);
+                Thread.sleep(1);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             //listener.close();
         }
-
-        System.out.println("Stopping");
     }
 }
