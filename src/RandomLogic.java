@@ -9,9 +9,29 @@ public class RandomLogic {
         random = new Random();
     }
 
+    public int getSeed(int x, int y) {
+        int xBias;
+        int yBias;
+
+        if (x > 0) {
+            xBias = 1223;
+        } else {
+            xBias = 2437;
+        }
+
+        if (y > 0) {
+            yBias = 7919;
+        }
+        else {
+            yBias = 7571;
+        }
+        return (x * xBias) + (y * yBias);
+    }
+
     //Returns an array of 3 ints representing a colour.
-    public Color getTile(long x, long y) {
-        random.setSeed((x * 1223) + (y * 7919));
+    public Color getTile(int x, int y) {
+
+        random.setSeed(getSeed(x, y));
 
         if (x == 0 && y == 0) return new Color(255, 0, 0);
 

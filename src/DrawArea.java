@@ -8,9 +8,9 @@ import java.awt.Graphics2D;
 public class DrawArea extends JPanel {
 
     RandomLogic logic;
-    int xPos = -200;
-    int yPos = -200;
     int cellSize = 100;
+    int xPos = -5 * cellSize;
+    int yPos = -5 * cellSize;
 
     //Constructor.
     public DrawArea() {
@@ -50,12 +50,13 @@ public class DrawArea extends JPanel {
         int cellX = startXIndex;
         int cellY = startYIndex;
 
-        System.out.println(startXIndex + ", " + startYIndex);
-
         for (int y = -yOffset; y < getHeight(); y += cellSize) {
             for (int x = -xOffset; x < getWidth(); x += cellSize) {
                 g2d.setColor(logic.getTile(cellX, cellY));
                 g2d.fillRect(x, y, cellSize, cellSize);
+
+                g2d.setColor(Color.white);
+                g2d.drawString("" + logic.getSeed(cellX, cellY), x + cellSize / 2, y + cellSize / 2);
                 
                 cellX++;
             }
