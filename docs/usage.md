@@ -41,7 +41,7 @@ To build the application in vscode simply press
 ```ctrl + shift + B```, or type in a console:
 
 ```shell
-sh build.sh
+sh tools/build.sh
 ```
 
 ## Run
