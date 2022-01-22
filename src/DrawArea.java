@@ -5,18 +5,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import java.awt.Point;
-
 public class DrawArea extends JPanel {
 
     RandomLogic logic;
-    MouseListen listener;
+    ClickListener listener;
     int cellSize = 100;
-    static int xPos = 0;
-    static int yPos = 0;
-
-    int xDisplacement = 0;
-    int yDisplacement = 0;
+    int xPos = 0;
+    int yPos = 0;
 
     //Constructor.
     public DrawArea() {
@@ -25,7 +20,7 @@ public class DrawArea extends JPanel {
 
         logic = new RandomLogic();
 
-        listener = new MouseListen();
+        listener = new ClickListener(this);
         addMouseListener(listener);
     }
     
@@ -40,17 +35,6 @@ public class DrawArea extends JPanel {
 
         //Optionally draw grid.
         drawGrid(g2d);
-
-        if (listener.getMouse1Down()) {
-            Point point = getMousePosition();
-            if (point != null) {
-                xPos = (int) point.getX() * -1;
-                yPos = (int) point.getY() * -1;
-            }
-        }
-        else {
-
-        }
     }
 
     //Draw tiles to window.

@@ -34,7 +34,7 @@ class MainWindow extends JFrame {
     public void run() {
         setVisible(true);
 
-        while (listener.isWinOpen()) {
+        /*while (listener.isWinOpen()) {
             canvas.repaint();
 
             try {
@@ -44,6 +44,6 @@ class MainWindow extends JFrame {
             }
 
             //listener.close();
-        }
+        }*/
     }
 }
