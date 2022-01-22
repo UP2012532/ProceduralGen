@@ -33,17 +33,5 @@ class MainWindow extends JFrame {
     //Start the mainloop for the application.
     public void run() {
         setVisible(true);
-
-        /*while (listener.isWinOpen()) {
-            canvas.repaint();
-
-            try {
-                Thread.sleep(1);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            //listener.close();
-        }*/
     }
 }
