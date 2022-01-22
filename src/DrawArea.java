@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import java.awt.Font;
+import java.awt.FontMetrics;
+
 public class DrawArea extends JPanel {
 
     RandomLogic logic;
@@ -29,6 +32,9 @@ public class DrawArea extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+
+        Font font = new Font("Arial", Font.PLAIN, 14);
+        g2d.setFont(font);
 
         //Draw cells.
         drawCells(g2d);
@@ -55,15 +61,25 @@ public class DrawArea extends JPanel {
             for (int x = -xOffset; x < getWidth(); x += cellSize) {
                 g2d.setColor(logic.getTile(cellX, cellY));
                 g2d.fillRect(x, y, cellSize, cellSize);
-
-                g2d.setColor(Color.white);
-                g2d.drawString("" + logic.getSeed(cellX, cellY), x + cellSize / 2, y + cellSize / 2);
+                drawText(g2d, ""+logic.getSeed(cellX, cellY), x, y);
                 
                 cellX++;
             }
             cellX = startXIndex;
             cellY++;
         }
+    }
+
+    //Draw the text in each cell centered.
+    private void drawText(Graphics2D g2d, String text, int x, int y) {
+        FontMetrics metrics = g2d.getFontMetrics(); //Get font data
+
+        //Center text on cell.
+        x += (cellSize - metrics.stringWidth(text)) / 2;
+        y += ((cellSize - metrics.getHeight()) / 2) + metrics.getAscent();
+
+        g2d.setColor(Color.white);
+        g2d.drawString(text, x, y);
     }
 
     //Draw the grid that the cells will occupy.
