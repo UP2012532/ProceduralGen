@@ -6,9 +6,9 @@ import java.awt.Color;
 */
 public class RandomLogic {
 
-    Random random;
+    private Random random;
 
-    //Constructer.
+    //Constructor.
     public RandomLogic() {
         random = new Random();
     }

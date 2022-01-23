@@ -5,10 +5,10 @@ import java.awt.Point;
 
 public class ClickListener implements MouseListener {
     
-    boolean mouse1Down = false;
-    DrawArea area;
+    private boolean mouse1Down = false;
+    private DrawArea area;
 
-    //Constructer.
+    //Constructor.
     public ClickListener(DrawArea area) {
         this.area = area;
     }
@@ -54,14 +54,14 @@ public class ClickListener implements MouseListener {
 
             if (point == null) { return; } //User has clicked outside the window.
 
-            int xDist = area.xPos - ((int) point.getX() * -1);
-            int yDist = area.yPos - ((int) point.getY() * -1);
+            int xDist = area.getScreenX() - ((int) point.getX() * -1);
+            int yDist = area.getScreenY() - ((int) point.getY() * -1);
 
             while (mouse1Down) {
                 point = area.getMousePosition();
                 if (point != null) {
-                    area.xPos = ((int) point.getX() * -1) + xDist;
-                    area.yPos = ((int) point.getY() * -1) + yDist;
+                    area.setScreenX(((int) point.getX() * -1) + xDist);
+                    area.setScreenY(((int) point.getY() * -1) + yDist);
 
                     area.repaint();
                 }

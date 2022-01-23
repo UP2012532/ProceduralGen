@@ -10,11 +10,15 @@ import java.awt.FontMetrics;
 
 public class DrawArea extends JPanel {
 
-    RandomLogic logic;
-    ClickListener listener;
-    int cellSize = 100;
-    int xPos = 0;
-    int yPos = 0;
+    private RandomLogic logic;
+    private ClickListener listener;
+
+    //The width and height of each cell
+    private int cellSize = 100;
+
+    //Coordinate at the top right of the screen.
+    private int xPos = 0;
+    private int yPos = 0;
 
     //Constructor.
     public DrawArea() {
@@ -48,7 +52,7 @@ public class DrawArea extends JPanel {
     * @param  g2d  Graphics object that the cells are draw to.
     */
     private void drawCells(Graphics2D g2d) {
-        //Offset: how far does each cell need to be shifted over.
+        //Offset: how far does each cell needs to be shifted over.
         int xOffset =  xPos % cellSize;
         int yOffset =  yPos % cellSize;
 
@@ -124,5 +128,45 @@ public class DrawArea extends JPanel {
         for (int x = -xOffset; x < getWidth(); x += cellSize) {
             g2d.drawLine(x, 0, x, getHeight());
         }
+    }
+
+    //---Getters---
+
+    /**
+    * Returns the x position of the coordinate in the top left corner.
+    *
+    * @return The the x position of the draw area.
+    */
+    public int getScreenX() {
+        return xPos;
+    }
+
+    /**
+    * Returns the y position of the coordinate in the top left corner.
+    *
+    * @return The the y position of the draw area.
+    */
+    public int getScreenY() {
+        return yPos;
+    }
+
+    //---Setters---
+
+    /**
+    * Sets the x position of the drawing area.
+    *
+    * @param  x  The new x position of the window.
+    */
+    public void setScreenX(int x) {
+        xPos = x;
+    }
+
+    /**
+    * Sets the y position of the drawing area.
+    *
+    * @param  y  The new y position of the window.
+    */
+    public void setScreenY(int y) {
+        yPos = y;
     }
 }
