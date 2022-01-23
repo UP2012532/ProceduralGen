@@ -6,6 +6,7 @@ class MainWindow extends JFrame {
     private DrawArea canvas;
     private CloseListener listener;
 
+    //Entry point.
     public static void main(String[] args) {
         MainWindow mw = new MainWindow();
         mw.run();

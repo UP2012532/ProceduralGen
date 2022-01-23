@@ -27,14 +27,13 @@ public class DrawArea extends JPanel {
         addMouseListener(listener);
     }
     
-    //Where all the window painting happens.
+    //Where all the window painting happens (called by this.repaint()).
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        Font font = new Font("Arial", Font.PLAIN, 14);
-        g2d.setFont(font);
+        g2d.setFont(new Font("Arial", Font.PLAIN, 14));
 
         //Draw cells.
         drawCells(g2d);
@@ -43,23 +42,34 @@ public class DrawArea extends JPanel {
         drawGrid(g2d);
     }
 
-    //Draw tiles to window.
+    /**
+    * Draws each cell to the drawing area.
+    *
+    * @param  g2d  Graphics object that the cells are draw to.
+    */
     private void drawCells(Graphics2D g2d) {
+        //Offset: how far does each cell need to be shifted over.
         int xOffset =  xPos % cellSize;
         int yOffset =  yPos % cellSize;
 
+        //When the offset is negative it needs to be altered.
         if (xOffset < 0) xOffset = cellSize - Math.abs(xOffset);
         if (yOffset < 0) yOffset = cellSize - Math.abs(yOffset);
 
+        //Finds the lowest x and y indexes of the cells on the screen.
         final int startXIndex = (int)(Math.floor((double)(xPos) / (double)cellSize));
         final int startYIndex = (int)(Math.floor((double)(yPos) / (double)cellSize));
 
+        //Cell x and y: track the current cell that is being worked on
         int cellX = startXIndex;
         int cellY = startYIndex;
 
+        //Iterate across screen space.
         for (int y = -yOffset; y < getHeight(); y += cellSize) {
             for (int x = -xOffset; x < getWidth(); x += cellSize) {
-                g2d.setColor(logic.getTile(cellX, cellY));
+                //Draw cells to screen.
+                g2d.setColor(logic.getCell(cellX, cellY));
+
                 g2d.fillRect(x, y, cellSize, cellSize);
                 drawText(g2d, ""+logic.getSeed(cellX, cellY), x, y);
                 
@@ -70,7 +80,14 @@ public class DrawArea extends JPanel {
         }
     }
 
-    //Draw the text in each cell centered.
+    /**
+    * Draws a string in the center of a cell.
+    *
+    * @param  g2d  Graphics object that the cells are draw to.
+    * @param  text  String to be drawn to the screen.
+    * @param  x  The x coordinate of the top left corner of the cell.
+    * @param  y  The y coordinate of the top left corner of the cell.
+    */
     private void drawText(Graphics2D g2d, String text, int x, int y) {
         FontMetrics metrics = g2d.getFontMetrics(); //Get font data
 
@@ -82,11 +99,17 @@ public class DrawArea extends JPanel {
         g2d.drawString(text, x, y);
     }
 
-    //Draw the grid that the cells will occupy.
+    /**
+    * Draws the grid lines to the drawing area.
+    *
+    * @param  g2d  Graphics object that the lines are draw to.
+    */
     private void drawGrid(Graphics2D g2d) {
+        //Offset: how far does each cell need to be shifted over.
         int xOffset =  xPos % cellSize;
         int yOffset =  yPos % cellSize;
 
+        //When the offset is negative it needs to be altered.
         if (xOffset < 0) xOffset = cellSize - Math.abs(xOffset);
         if (yOffset < 0) yOffset = cellSize - Math.abs(yOffset);
 

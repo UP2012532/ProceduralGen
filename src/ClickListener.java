@@ -8,19 +8,22 @@ public class ClickListener implements MouseListener {
     boolean mouse1Down = false;
     DrawArea area;
 
+    //Constructer.
     public ClickListener(DrawArea area) {
         this.area = area;
     }
 
+    //Called when a mouse button is pressed.
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            InnerClickListener whileClick = new InnerClickListener();
+            ViewMover whileClick = new ViewMover();
             mouse1Down = true;
-            whileClick.start();
+            whileClick.start(); //Start thread to move the view in the window.
         }
     }
 
+    //Called when a mouse button is released
     @Override
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
@@ -37,15 +40,19 @@ public class ClickListener implements MouseListener {
     public void mouseExited(MouseEvent e) {}
 
     /**
-     * InnerMouseListen
+     * ViewMover
+     * 
+     * Holds a thread that enables the window to be moved whilst allowing
+     * mouse events to still be listened to.
      */
-    public class InnerClickListener extends Thread {
+    public class ViewMover extends Thread {
         
+        //Called when the thread is started(this.start()).
         @Override
         public void run() {
             Point point = area.getMousePosition();
 
-            if (point == null) { return; }
+            if (point == null) { return; } //User has clicked outside the window.
 
             int xDist = area.xPos - ((int) point.getX() * -1);
             int yDist = area.yPos - ((int) point.getY() * -1);

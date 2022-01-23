@@ -1,35 +1,43 @@
 import java.util.Random;
 import java.awt.Color;
 
+/**
+* Class for all the logic that determines how the cells are drawn.
+*/
 public class RandomLogic {
 
     Random random;
 
+    //Constructer.
     public RandomLogic() {
         random = new Random();
     }
 
+    /**
+    * Given a coordinate returns a semi randomised seed to be used later (Based on PRNG).
+    *
+    * @param  x  The x coordinate of the cell.
+    * @param  y  The y coordinate of the cell.
+    * @return Returns the seed for the given seed.
+    */
     public int getSeed(int x, int y) {
-        int xBias;
-        int yBias;
+        final int a = 1664525;
+        final int c = 1013904223; //1013904223
+        final int m = (int)Math.pow(2, 32);
 
-        if (x > 0) {
-            xBias = 1223;
-        } else {
-            xBias = 2437;
-        }
-
-        if (y > 0) {
-            yBias = 7919;
-        }
-        else {
-            yBias = 7571;
-        }
-        return (x * xBias) + (y * yBias);
+        final int inSeed = (x << y) + (x + y);
+            
+        return ((a * inSeed) + c) % m;
     }
 
-    //Returns an array of 3 ints representing a colour.
-    public Color getTile(int x, int y) {
+    /**
+    * Given a coordinate returns a colour for the cell.
+    *
+    * @param  x  The x coordinate of the cell.
+    * @param  y  The y coordinate of the cell.
+    * @return Colour the specified cell should be.
+    */
+    public Color getCell(int x, int y) {
 
         random.setSeed(getSeed(x, y));
 
