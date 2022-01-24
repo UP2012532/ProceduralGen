@@ -1,10 +1,12 @@
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
+/**
+* Main window for the application.
+*/
 class MainWindow extends JFrame {
 
     private DrawArea canvas;
-    private CloseListener listener;
 
     //Entry point.
     public static void main(String[] args) {
@@ -15,12 +17,8 @@ class MainWindow extends JFrame {
     //Create the main window from which the application will be run.
     public MainWindow() {
         //Set window title and set close opperation.
-        setTitle("");
+        setTitle("Procedural Generator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Create event listener.
-        listener = new CloseListener();
-        addWindowListener(listener);
 
         //Set initial sixe and add drawing area.
         setSize(new Dimension(1024, 576));

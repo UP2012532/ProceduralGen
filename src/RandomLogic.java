@@ -2,7 +2,7 @@ import java.util.Random;
 import java.awt.Color;
 
 /**
-* Class for all the logic that determines how the cells are drawn.
+* Contains random logic that determines how the cells are drawn.
 */
 public class RandomLogic {
 

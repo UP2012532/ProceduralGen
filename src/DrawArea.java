@@ -8,6 +8,9 @@ import java.awt.Graphics2D;
 import java.awt.Font;
 import java.awt.FontMetrics;
 
+/**
+* Component that can be painted to and displayed.
+*/
 public class DrawArea extends JPanel {
 
     private RandomLogic logic;
@@ -17,7 +20,7 @@ public class DrawArea extends JPanel {
     //The width and height of each cell
     private int cellSize = 100;
 
-    //Coordinate at the top right of the screen.
+    //Coordinate at the top left of the screen.
     private int xPos = 0;
     private int yPos = 0;
 

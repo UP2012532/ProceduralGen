@@ -3,6 +3,9 @@ import java.awt.event.MouseListener;
 
 import java.awt.Point;
 
+/**
+* Listens for mouse clicks and move draw area.
+*/
 public class ClickListener implements MouseListener {
     
     private boolean mouse1Down = false;
