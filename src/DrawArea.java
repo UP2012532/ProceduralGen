@@ -11,7 +11,8 @@ import java.awt.FontMetrics;
 public class DrawArea extends JPanel {
 
     private RandomLogic logic;
-    private ClickListener listener;
+    private ClickListener clickListen;
+    private ScrollListener scrollListen;
 
     //The width and height of each cell
     private int cellSize = 100;
@@ -27,8 +28,11 @@ public class DrawArea extends JPanel {
 
         logic = new RandomLogic();
 
-        listener = new ClickListener(this);
-        addMouseListener(listener);
+        clickListen = new ClickListener(this);
+        addMouseListener(clickListen);
+
+        scrollListen = new ScrollListener(this);
+        addMouseWheelListener(scrollListen);
     }
     
     //Where all the window painting happens (called by this.repaint()).
@@ -75,7 +79,11 @@ public class DrawArea extends JPanel {
                 g2d.setColor(logic.getCell(cellX, cellY));
 
                 g2d.fillRect(x, y, cellSize, cellSize);
-                drawText(g2d, ""+logic.getSeed(cellX, cellY), x, y);
+                
+                //If the cells are too small don't bother drawing strings.
+                if (cellSize >= 100) {
+                    drawText(g2d, ""+logic.getSeed(cellX, cellY), x, y);
+                }
                 
                 cellX++;
             }
@@ -135,7 +143,7 @@ public class DrawArea extends JPanel {
     /**
     * Returns the x position of the coordinate in the top left corner.
     *
-    * @return The the x position of the draw area.
+    * @return The x position of the draw area.
     */
     public int getScreenX() {
         return xPos;
@@ -144,10 +152,19 @@ public class DrawArea extends JPanel {
     /**
     * Returns the y position of the coordinate in the top left corner.
     *
-    * @return The the y position of the draw area.
+    * @return The y position of the draw area.
     */
     public int getScreenY() {
         return yPos;
+    }
+
+    /**
+    * Returns the current cell size.
+    *
+    * @return cellsize.
+    */
+    public int getCellSize() {
+        return cellSize;
     }
 
     //---Setters---
@@ -168,5 +185,14 @@ public class DrawArea extends JPanel {
     */
     public void setScreenY(int y) {
         yPos = y;
+    }
+
+    /**
+    * Sets the cell size of the drawing area.
+    *
+    * @param  size  The new cell size for the window.
+    */
+    public void setCellSize(int size) {
+        cellSize = size;
     }
 }
