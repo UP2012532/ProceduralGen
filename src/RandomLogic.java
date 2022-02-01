@@ -8,14 +8,14 @@ public class RandomLogic {
     private long nLehmer = 0;
 
     /**
-    * Given a coordinate returns a semi randomised seed to be used later.
+    * Given a coordinate returns a unique seed to be used later.
     *
     * @param  x  The x coordinate of the cell.
     * @param  y  The y coordinate of the cell.
     * @return Returns the seed for the given seed.
     */
     public long getSeed(int x, int y) {
-        return (x & 0xFFFF) << 16 | (y & 0xFFFF);
+        return (((long) x) << 32) | (y & 0xffffffffL);
     }
 
     /**
