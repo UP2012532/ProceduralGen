@@ -19,7 +19,7 @@ public class ClickListener implements MouseListener {
     //Called when a mouse button is pressed.
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
             ViewMover whileClick = new ViewMover();
             mouse1Down = true;
             whileClick.start(); //Start thread to move the view in the window.
@@ -29,7 +29,7 @@ public class ClickListener implements MouseListener {
     //Called when a mouse button is released
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
             mouse1Down = false;
         }
     }
